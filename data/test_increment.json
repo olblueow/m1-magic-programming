@@ -4,7 +4,7 @@
   "instructions": [
     {
       "action": "WRITE_1", 
-      "description": "The central Ooze becomes a Zombie (Write 1)"
+      "description": "The central 0 becomes 1"
     },
     {
       "action": "MOVE_RIGHT", 
@@ -12,7 +12,7 @@
     },
     {
       "action": "WRITE_0", 
-      "description": "The right Zombie becomes an Ooze (Write 0)"
+      "description": "The right 1 becomes 0 (Write 0)"
     },
     {
       "action": "MOVE_LEFT", 
