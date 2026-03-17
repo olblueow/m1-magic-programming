@@ -1,0 +1,22 @@
+{
+  "initial_tape_state": [0, 1, 0, 1, 0],
+  "initial_head_position": 2,
+  "instructions": [
+    {
+      "action": "WRITE_1", 
+      "description": "The central 0 becomes 1"
+    },
+    {
+      "action": "MOVE_RIGHT", 
+      "description": "The head moves to the right cell (Move Right)"
+    },
+    {
+      "action": "WRITE_0", 
+      "description": "The right 1 becomes 0 (Write 0)"
+    },
+    {
+      "action": "MOVE_LEFT", 
+      "description": "The head moves back to the left cell (Move Left)"
+    }
+  ]
+}
