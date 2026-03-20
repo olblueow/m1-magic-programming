@@ -1,6 +1,6 @@
 import tkinter as tk
 from logic import ProgramLoader
-from gui import TuringGUI
+from archive_v0_tkinter.gui import TuringGUI
 
 def main():
     # Load the JSON program (Model)
