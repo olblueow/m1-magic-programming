@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cockatrice_deck version="1">
+    <deckname>Single Bit Flip Test</deckname>
+
+    <comments>
+        Minimal test: create one cell and flip its value.
+        Used to verify that card effects work independently.
+    </comments>
+
+    <zone name="main">
+
+        <!-- SETUP: create 1 cell -->
+        <card name="Slime Molding" annotation="create cell (head)" />
+
+        <!-- CONFIG: define transformation -->
+        <card name="Artificial Evolution" annotation="Ooze dies -> create Zombie" />
+
+        <!-- EXECUTE: apply change -->
+        <card name="Infest" annotation="flip bit" />
+
+    </zone>
+</cockatrice_deck>
