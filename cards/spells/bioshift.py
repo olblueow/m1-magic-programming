@@ -1,20 +1,30 @@
 from cards.base import Card
-import cards.factory as factory
 
 class Bioshift(Card):
     def __init__(self):
         super().__init__("Bioshift", "Spell")
 
     def execute(self, battlefield, annotation="") -> str:
-        idx = [i for i, c in enumerate(battlefield.memory) if c and c.counters == 0][0]
+        # Expected annotation: "source_row,source_col|dest_row,dest_col"
+        source_str, dest_str = annotation.split("|")
+        s_row, s_col = map(int, source_str.split(","))
+        d_row, d_col = map(int, dest_str.split(","))
         
-        if idx + 1 >= len(battlefield.memory):
-            nouvel_ooze = factory.create("Ooze")
-            if nouvel_ooze:
-                nouvel_ooze.counters = 1  # type: ignore
-                battlefield.memory.append(nouvel_ooze)
-                
-        battlefield.memory[idx+1].counters -= 1
-        battlefield.memory[idx].counters += 1
+        source = battlefield.grid[s_row][s_col]
+        dest = battlefield.grid[d_row][d_col]
         
-        return f"Bioshift: Déplacement à droite (Index {idx+1})"
+        # Check if targets exist and if the source has at least one counter
+        if source and dest and hasattr(source, 'counters') and source.counters > 0:
+            # 1. Move the logical counter
+            source.counters -= 1
+            dest.counters += 1
+            
+            # 2. Move the PHYSICAL effect (Stats)
+            source.power -= 1
+            source.toughness -= 1
+            dest.power += 1
+            dest.toughness += 1
+            
+            return f"Bioshift: Counter moved from [{s_row},{s_col}] to [{d_row},{d_col}]"
+            
+        return "Bioshift: Invalid target or no counter found on source."

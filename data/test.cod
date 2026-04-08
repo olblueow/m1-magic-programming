@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cockatrice_deck version="1">
+    <deckname>The Great Architecture Test (Full Coverage)</deckname>
+    <zone name="main">
+        <card name="Slime Molding" annotation="0,0" /> 
+        <card name="Slime Molding" annotation="0,2" /> 
+        <card name="Rotlung Reanimator" annotation="1,0" /> 
+        <card name="Giant Growth" annotation="0,2" />
+
+        <card name="Battlegrowth" annotation="0,0" />
+        <card name="Bioshift" annotation="0,0|0,2" /> 
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze" />
+
+        <card name="Murder" annotation="0,0" />
+
+        <card name="Giant Growth" annotation="1,0" />
+        <card name="Battlegrowth" annotation="1,0" />
+
+        <card name="Infest" annotation="Final Wipe" />
+    </zone>
+</cockatrice_deck>

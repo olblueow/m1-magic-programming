@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cockatrice_deck version="1">
+    <deckname>Test Suite 1 - Shift Register (Bioshift)</deckname>
+    <zone name="main">
+        <card name="Slime Molding" annotation="0,0" />
+        <card name="Slime Molding" annotation="0,1" />
+        <card name="Slime Molding" annotation="0,2" />
+
+        <card name="Battlegrowth" annotation="0,0" />
+
+        <card name="Bioshift" annotation="0,0|0,1" />
+        
+        <card name="Bioshift" annotation="0,1|0,2" />
+
+        <card name="Fate Transfer" annotation="0,2|0,1" />
+    </zone>
+</cockatrice_deck>

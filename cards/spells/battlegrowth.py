@@ -5,10 +5,13 @@ class Battlegrowth(Card):
         super().__init__("Battlegrowth", "Spell")
 
     def execute(self, battlefield, annotation="") -> str:
-        index = int(annotation) 
+        # Transforms "0,3" into row=0 and col=3
+        row, col = map(int, annotation.split(",")) 
         
-        battlefield.memory[index].counters += 1
-        battlefield.memory[index].power += 1
-        battlefield.memory[index].toughness += 1
-        
-        return f"Battlegrowth: +1/+1 (Bouclier) sur l'Index {index}"
+        target = battlefield.grid[row][col]
+        if target:
+            target.counters += 1
+            target.power += 1
+            target.toughness += 1
+            
+        return f"Battlegrowth: +1/+1 on target at [{row}, {col}]"

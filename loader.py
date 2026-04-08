@@ -1,9 +1,12 @@
 import xml.etree.ElementTree as ET
 
-class ProgramLoader:
-    def __init__(self, cod_path):
+class DeckLoader:
+    """Its sole purpose is to read the XML file and extract the instructions."""
+    
+    def __init__(self, cod_path: str):
         tree = ET.parse(cod_path)
-        self.program_name = tree.findtext("deckname")
+        self.program_name = tree.findtext("deckname") or "Unknown"
+        
         self.instructions = [
             {
                 "card": card.get("name"), 
