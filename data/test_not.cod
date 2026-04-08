@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cockatrice_deck version="1">
-    <deckname>Bitwise NOT (Simple Test)</deckname>
-
-    <comments>
-        Simple test scenario to demonstrate that the engine
-        works with a different program (not increment).
-        We flip bits using Infest + Rotlung logic.
-    </comments>
-
+    <deckname>Test Logic NOT (0 devient 1)</deckname>
     <zone name="main">
-
-        <!-- SETUP: create 3 cells -->
-        <card name="Slime Molding" annotation="create cell 0" />
-        <card name="Slime Molding" annotation="create cell 1" />
-        <card name="Slime Molding" annotation="create cell 2 (head)" />
-
-        <!-- protect memory -->
-        <card name="Battlegrowth" annotation="protect cell 0" />
-        <card name="Battlegrowth" annotation="protect cell 1" />
-
-        <!-- FLIP first bit -->
-        <card name="Artificial Evolution" annotation="Ooze dies -> create Zombie" />
-        <card name="Infest" annotation="flip bit" />
-
-        <!-- MOVE RIGHT -->
-        <card name="Bioshift" annotation="move right" />
-
-        <!-- FLIP second bit -->
-        <card name="Artificial Evolution" annotation="Zombie dies -> create Ooze" />
-        <card name="Infest" annotation="flip bit" />
-
+        <card name="Rotlung Reanimator" annotation="Install processor" />
+        
+        <card name="Slime Molding" annotation="Create bit 0" />
+        
+        <card name="Artificial Evolution" annotation="watch=Ooze|create=Zombie" />
+        
+        <card name="Infest" annotation="Flip the bit" />
     </zone>
 </cockatrice_deck>
