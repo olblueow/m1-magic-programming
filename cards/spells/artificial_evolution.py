@@ -5,14 +5,14 @@ class ArtificialEvolution(Card):
         super().__init__("Artificial Evolution", "Spell")
 
     def execute(self, battlefield, annotation="") -> str:
-        # Annotation looks like: "1,0|Cleric|Ooze" (Target | Old word | New word)
+        # Expected annotation: "1,0|Cleric|Ooze"
         coords, old_word, new_word = annotation.split("|")
         row, col = map(int, coords.split(","))
         
-        target = battlefield.grid[row][col]
+        # CHANGEMENT ICI : On utilise la nouvelle fonction
+        target = battlefield.get_card_at(row, col)
         
         if target:
-            # Simulate Find/Replace on the Rotlung's two variables
             if hasattr(target, 'watch_type') and target.watch_type == old_word:
                 target.watch_type = new_word
             if hasattr(target, 'create_type') and target.create_type == old_word:

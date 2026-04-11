@@ -8,7 +8,9 @@ class Murder(Card):
         # Target: "row,col" (Kills the creature at exact coordinates)
         row, col = map(int, annotation.split(","))
         
-        target = battlefield.grid[row][col]
+        # CHANGEMENT : Utilisation de get_card_at
+        target = battlefield.get_card_at(row, col)
+        
         if target:
             # Set toughness to 0 so the Game Engine triggers its death
             target.toughness = 0

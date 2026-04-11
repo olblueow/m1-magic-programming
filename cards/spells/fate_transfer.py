@@ -9,8 +9,9 @@ class FateTransfer(Card):
         s_row, s_col = map(int, source_str.split(","))
         d_row, d_col = map(int, dest_str.split(","))
         
-        source = battlefield.grid[s_row][s_col]
-        dest = battlefield.grid[d_row][d_col]
+        # CORRECTIF : Utilisation de get_card_at() au lieu de [][]
+        source = battlefield.get_card_at(s_row, s_col)
+        dest = battlefield.get_card_at(d_row, d_col)
         
         if source and dest and hasattr(source, 'counters') and source.counters > 0:
             source.counters -= 1

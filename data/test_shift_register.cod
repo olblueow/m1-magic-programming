@@ -5,6 +5,12 @@
         <card name="Slime Molding" annotation="0,0" />
         <card name="Slime Molding" annotation="0,1" />
         <card name="Slime Molding" annotation="0,2" />
+        <card name="Slime Molding" annotation="0,3" />
+        <card name="Slime Molding" annotation="0,4" />
+        <card name="Slime Molding" annotation="0,5" />
+        <card name="Slime Molding" annotation="0,6" />
+        <card name="Slime Molding" annotation="0,7" />
+        <card name="Slime Molding" annotation="0,8" />
 
         <card name="Battlegrowth" annotation="0,0" />
 
@@ -13,5 +19,6 @@
         <card name="Bioshift" annotation="0,1|0,2" />
 
         <card name="Fate Transfer" annotation="0,2|0,1" />
+        <card name="Infest" annotation="" />
     </zone>
 </cockatrice_deck>

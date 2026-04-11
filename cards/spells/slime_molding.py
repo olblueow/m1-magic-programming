@@ -11,7 +11,10 @@ class SlimeMolding(Card):
         # Read the targeted coordinates (e.g., "0,5")
         row, col = map(int, annotation.split(","))
         
-        # Use the battlefield's new placement function
-        battlefield.place_card(new_ooze, row, col)
+        # Attempt to place the card
+        success = battlefield.place_card(new_ooze, row, col)
         
-        return f"Slime Molding: +1 Ooze placed at [{row}, {col}]"
+        if success:
+            return f"Slime Molding: +1 Ooze placed at [{row}, {col}]"
+        else:
+            return f"Slime Molding: Collision! Ooze sent to graveyard instead of [{row}, {col}]"

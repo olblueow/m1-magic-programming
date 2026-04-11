@@ -5,11 +5,10 @@ class Infest(Card):
         super().__init__("Infest", "Spell")
 
     def execute(self, battlefield, annotation="") -> str:
-        # Strike across all rows and all columns
-        for row in battlefield.grid:
-            for target in row:
-                if target and hasattr(target, 'toughness'):
-                    target.toughness -= 2
-                    target.power -= 2
+        # Strike across all values in the dictionary
+        for target in list(battlefield.grid.values()):
+            if target and hasattr(target, 'toughness'):
+                target.toughness -= 2
+                target.power -= 2
                     
-        return "Infest: -2/-2 globally across the entire grid"
+        return "Infest: -2/-2 globally across the sparse grid"

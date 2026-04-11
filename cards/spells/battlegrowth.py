@@ -8,7 +8,9 @@ class Battlegrowth(Card):
         # Transforms "0,3" into row=0 and col=3
         row, col = map(int, annotation.split(",")) 
         
-        target = battlefield.grid[row][col]
+        # CHANGEMENT : Utilisation de get_card_at
+        target = battlefield.get_card_at(row, col)
+        
         if target:
             target.counters += 1
             target.power += 1
