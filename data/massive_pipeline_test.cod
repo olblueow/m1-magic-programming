@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cockatrice_deck version="1">
+    <deckname>Massive Data Pipeline &amp; Collision Test (20-bits)</deckname>
+    <zone name="main">
+        <card name="Rotlung Reanimator" annotation="1,-5" />
+        <card name="Rotlung Reanimator" annotation="1,0" />
+        <card name="Rotlung Reanimator" annotation="1,5" />
+        <card name="Rotlung Reanimator" annotation="1,10" />
+
+        <card name="Artificial Evolution" annotation="1,-5|Cleric|Ooze" />
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze" />
+        <card name="Artificial Evolution" annotation="1,5|Cleric|Ooze" />
+        <card name="Artificial Evolution" annotation="1,10|Cleric|Ooze" />
+
+        <card name="Slime Molding" annotation="0,-5" />
+        <card name="Slime Molding" annotation="0,-4" />
+        <card name="Slime Molding" annotation="0,-3" />
+        <card name="Slime Molding" annotation="0,-2" />
+        <card name="Slime Molding" annotation="0,-1" />
+        
+        <card name="Slime Molding" annotation="0,0" />
+        <card name="Slime Molding" annotation="0,1" />
+        <card name="Slime Molding" annotation="0,2" />
+        <card name="Slime Molding" annotation="0,3" />
+        <card name="Slime Molding" annotation="0,4" />
+        
+        <card name="Slime Molding" annotation="0,5" />
+        <card name="Slime Molding" annotation="0,6" />
+        <card name="Slime Molding" annotation="0,7" />
+        <card name="Slime Molding" annotation="0,8" />
+        <card name="Slime Molding" annotation="0,9" />
+        
+        <card name="Slime Molding" annotation="0,10" />
+        <card name="Slime Molding" annotation="0,11" />
+        <card name="Slime Molding" annotation="0,12" />
+        <card name="Slime Molding" annotation="0,13" />
+        <card name="Slime Molding" annotation="0,14" />
+
+        <card name="Slime Molding" annotation="0,5" />
+        <card name="Rotlung Reanimator" annotation="1,0" />
+
+        <card name="Battlegrowth" annotation="0,-5" />
+        <card name="Battlegrowth" annotation="0,14" />
+
+        <card name="Bioshift" annotation="0,-5|0,-2" />
+        <card name="Fate Transfer" annotation="0,-2|0,0" />
+        
+        <card name="Bioshift" annotation="0,14|0,10" />
+        <card name="Fate Transfer" annotation="0,10|0,5" />
+
+        <card name="Murder" annotation="0,2" />
+        <card name="Murder" annotation="0,12" />
+
+        <card name="Giant Growth" annotation="1,-5" />
+        <card name="Giant Growth" annotation="1,0" />
+        <card name="Giant Growth" annotation="1,5" />
+        <card name="Giant Growth" annotation="1,10" />
+        
+        <card name="Giant Growth" annotation="0,-3" />
+        <card name="Giant Growth" annotation="0,4" />
+        <card name="Giant Growth" annotation="0,13" />
+
+        <card name="Infest" annotation="Executing Pipeline Resolution" />
+    </zone>
+</cockatrice_deck>
