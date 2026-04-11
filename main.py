@@ -38,10 +38,13 @@ def main():
             row_display = []
             for c in active_cols_in_row:
                 card_obj = board.get_card_at(i, c)
-                if hasattr(card_obj, 'power'):
-                    row_display.append(f"[{c}]: {card_obj.name} ({card_obj.power}/{card_obj.toughness})")
-                else:
-                    row_display.append(f"[{c}]: {card_obj.name}")
+                
+                # 👉 AJOUT ICI : On vérifie que card_obj existe bien pour Pylance
+                if card_obj is not None:
+                    if hasattr(card_obj, 'power'):
+                        row_display.append(f"[{c}]: {card_obj.name} ({card_obj.power}/{card_obj.toughness})")
+                    else:
+                        row_display.append(f"[{c}]: {card_obj.name}")
                     
             # Print nicely formatted
             print(f"Row {i} -> {', '.join(row_display)}")
@@ -56,10 +59,13 @@ def main():
     # Read the tape from lowest index to highest
     for col in row_0_cols:
         creature = board.get_card_at(0, col)
-        if creature.name == "Zombie":
-            bits.append(1)
-        elif creature.name == "Ooze":
-            bits.append(0)
+        
+        # 👉 AJOUT ICI : On vérifie que creature existe bien pour Pylance
+        if creature is not None:
+            if creature.name == "Zombie":
+                bits.append(1)
+            elif creature.name == "Ooze":
+                bits.append(0)
     
     binary_str = "".join(str(b) for b in bits)
 
