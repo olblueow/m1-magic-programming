@@ -6,7 +6,7 @@ from time import sleep
 
 def main():
     # 1. Load the deck
-    loader = DeckLoader("data/massive_pipeline_test.cod")
+    loader = DeckLoader("data/physics_test.cod")
     
     # 2. Setup the empty battlefield with its sparse 2D grid
     board = Battlefield()
