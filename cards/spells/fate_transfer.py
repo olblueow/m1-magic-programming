@@ -17,10 +17,11 @@ class FateTransfer(Card):
             source.counters -= 1
             dest.counters += 1
             
-            source.power -= 1
-            source.toughness -= 1
-            dest.power += 1
-            dest.toughness += 1
+            # 2. Move the PHYSICAL effect (Stats de BASE !)
+            source.base_power -= 1
+            source.base_toughness -= 1
+            dest.base_power += 1
+            dest.base_toughness += 1
             
             return f"Fate Transfer: Counter moved from [{s_row},{s_col}] to [{d_row},{d_col}]"
             
