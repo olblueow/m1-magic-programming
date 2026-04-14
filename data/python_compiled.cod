@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<cockatrice_deck version="1">
+    <deckname>Python Compiled Script</deckname>
+    <zone name="main">
+        <card name="Rotlung Reanimator" annotation="1,0"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
+        <card name="Slime Molding" annotation="0,0"/>
+        <card name="Battlegrowth" annotation="0,0"/>
+        <card name="Slime Molding" annotation="0,1"/>
+        <card name="Infest" annotation="Write '1' Cycle"/>
+        <card name="Battlegrowth" annotation="0,1"/>
+        <card name="Slime Molding" annotation="0,2"/>
+        <card name="Battlegrowth" annotation="0,2"/>
+        <card name="Slime Molding" annotation="0,3"/>
+        <card name="Infest" annotation="Write '1' Cycle"/>
+        <card name="Battlegrowth" annotation="0,3"/>
+        <card name="Slime Molding" annotation="0,5"/>
+        <card name="Battlegrowth" annotation="0,5"/>
+        <card name="Slime Molding" annotation="0,6"/>
+        <card name="Battlegrowth" annotation="0,6"/>
+        <card name="Slime Molding" annotation="0,7"/>
+        <card name="Infest" annotation="Write '1' Cycle"/>
+        <card name="Battlegrowth" annotation="0,7"/>
+        <card name="Slime Molding" annotation="0,8"/>
+        <card name="Battlegrowth" annotation="0,8"/>
+        <card name="Battlegrowth" annotation="0,3"/>
+        <card name="Infest" annotation="Clock Cycle Triggered"/>
+        <card name="Bioshift" annotation="0,5|0,0"/>
+        <card name="Bioshift" annotation="0,6|0,1"/>
+        <card name="Bioshift" annotation="0,7|0,2"/>
+        <card name="Bioshift" annotation="0,8|0,3"/>
+    </zone>
+</cockatrice_deck>
