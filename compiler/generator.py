@@ -25,4 +25,4 @@ class XMLGenerator:
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(pretty_xml)
             
-        print(f"✅ Compilation successful! Saved to: {output_path}")
+        print(f"Compilation successful! Saved to: {output_path}")

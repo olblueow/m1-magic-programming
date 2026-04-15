@@ -3,19 +3,17 @@ from compiler.translator import Translator
 from compiler.generator import XMLGenerator
 
 def main():
-    # 1. This is your pure High-Level Python-like code!
     source_code = """
-    # Allocation de la mémoire en blocs de 4-bits
     x = 5
     y = 2
 
-    # Opérations mathématiques
-    x += 1
-    
-    move(y, x)
+    x += 1     # x devient 6
+    y += 5     # y devient 7
+    y -= 2     # y re-devient 5
+    x *= 2     # x devient 12
+    x = 1 * 2  # x est écrasé et devient 2
     """
 
-    print("🔧 Compiling Pure Python script to Magic Cards...")
     
     lexer = Lexer()
     tokens = lexer.tokenize(source_code)

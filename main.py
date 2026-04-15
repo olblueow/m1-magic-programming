@@ -5,33 +5,31 @@ import cards.factory as factory
 from time import sleep
 
 def main():
-    # 1. Load the deck
+    # 1. Charger le deck compilé
     loader = DeckLoader("data/python_compiled.cod")
     
-    # 2. Setup the empty battlefield with its sparse 2D grid
+    # 2. Initialiser le plateau de jeu (grille 2D creuse)
     board = Battlefield()
     
-    # 3. Call the engine (referee) and show it the board
+    # 3. Lancer le moteur de jeu (l'arbitre)
     game = GameEngine(board)
     
     for step, inst in enumerate(loader.instructions, 1):
         card = factory.create(inst["card"])
         if not card:
-            print("Card not found:", inst["card"])
+            print("Carte introuvable :", inst["card"])
             continue
 
-        # The engine resolves the card on the board!
+        # Le moteur résout la carte sur le plateau
         log = game.resolve(card, inst["annotation"])
         
         if card.type != "Token": 
             print(f"[{step:03d}] {card.name} -> {log}")
         
-        # Observe row 0 and row 1 dynamically (Sparse Mode)
+        # Observer la ligne 0 (Mémoire) et la ligne 1 (CPU) dynamiquement
         for i in [0, 1]:
-            # Find all columns currently occupied in this specific row, sorted from lowest to highest
             active_cols_in_row = sorted([coords[1] for coords in board.grid.keys() if coords[0] == i])
             
-            # If the row is completely empty, skip printing it entirely
             if not active_cols_in_row:
                 continue
                 
@@ -39,37 +37,47 @@ def main():
             for c in active_cols_in_row:
                 card_obj = board.get_card_at(i, c)
                 
-                # 👉 AJOUT ICI : On vérifie que card_obj existe bien pour Pylance
                 if card_obj is not None:
                     if hasattr(card_obj, 'power'):
                         row_display.append(f"[{c}]: {card_obj.name} ({card_obj.power}/{card_obj.toughness})")
                     else:
                         row_display.append(f"[{c}]: {card_obj.name}")
                     
-            # Print nicely formatted
             print(f"Row {i} -> {', '.join(row_display)}")
             
-        sleep(0.1)  # Pause to better visualize the animation
+        sleep(0.1)
 
-    # Translate row 0 to binary
+    # --- LECTURE ET DÉCODAGE DE LA BANDE (MÉMOIRE) ---
+    print("\n" + "="*40)
+    print("ÉTAT FINAL DE LA MÉMOIRE")
+    print("="*40)
+    
     bits = []
-    # Find the active columns specifically on row 0, sorted lowest to highest (including negatives!)
     row_0_cols = sorted([coords[1] for coords in board.grid.keys() if coords[0] == 0])
     
-    # Read the tape from lowest index to highest
+    # Lire la bande de gauche à droite
     for col in row_0_cols:
         creature = board.get_card_at(0, col)
-        
-        # 👉 AJOUT ICI : On vérifie que creature existe bien pour Pylance
         if creature is not None:
             if creature.name == "Zombie":
-                bits.append(1)
+                bits.append("1")
             elif creature.name == "Ooze":
-                bits.append(0)
+                bits.append("0")
     
-    binary_str = "".join(str(b) for b in bits)
-
-    print(f"\nResult (Binary) : {binary_str}")
+    # Regrouper les bits par blocs de 4 (Taille d'une variable dans notre architecture)
+    chunk_size = 4
+    variables = [bits[i:i + chunk_size] for i in range(0, len(bits), chunk_size)]
+    
+    # Affichage clair des variables (On suppose que la première est x, la deuxième y, etc.)
+    var_names = ["x", "y", "z", "w"] # Noms par défaut pour l'affichage
+    
+    for idx, var_bits in enumerate(variables):
+        binary_str = "".join(var_bits)
+        # Convertir la chaîne binaire en entier décimal
+        decimal_val = int(binary_str, 2)
+        
+        name = var_names[idx] if idx < len(var_names) else f"Var_{idx}"
+        print(f"Variable '{name}' : {binary_str} (Décimal : {decimal_val})")
 
 if __name__ == "__main__":
     main()
