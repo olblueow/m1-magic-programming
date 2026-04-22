@@ -30,3 +30,6 @@ class RotlungReanimator(Creature):
                 return f"Trigger: Collision! {self.create_type} sent to graveyard."
                 
         return None
+    
+    def get_rules(self) -> str:
+        return f"Whenever a {self.watch_type} dies,\nput a 2/2 {self.create_type} token\ninto play."

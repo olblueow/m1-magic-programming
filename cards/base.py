@@ -5,6 +5,10 @@ class Card:
         
     def execute(self, battlefield, annotation: str = "") -> str:
         return ""
+    
+    def get_rules(self) -> str:
+            """Returns the rules text of the card."""
+            return ""
 
 class Creature(Card):
     def __init__(self, name: str, power: int, toughness: int):

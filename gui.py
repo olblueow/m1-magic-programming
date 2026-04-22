@@ -3,7 +3,9 @@ from tkinter import ttk
 import os
 from PIL import Image, ImageTk, ImageDraw
 
+# ─────────────────────────────────────────────────────────────
 # COLOR SCHEME & THEME
+# ─────────────────────────────────────────────────────────────
 BG_MAIN      = "#111111"   
 BG_PANEL     = "#1a1a1a"
 BG_CANVAS    = "#1e1e1e"   
@@ -12,30 +14,39 @@ TEXT_PRIMARY = "#ecf0f1"
 TEXT_ACCENT  = "#f39c12"
 
 class MagicGUI:
+    """
+    User Interface for the MTG Turing Machine.
+    Handles the Code Editor, the Battlefield visualization, and dynamic card rendering.
+    """
     def __init__(self, root, on_next_click, on_auto_click, on_pause_click, on_load_click, on_compile_click):
         self.root = root
         self.root.title("MTG Turing IDE")
         self.root.geometry("1200x850")
         self.root.configure(bg=BG_MAIN)
         
+        # Base card dimensions (100% zoom level)
         self.base_w = 100
         self.base_h = 140
         self.cell_w = self.base_w
         self.cell_h = self.base_h
         
+        # Cache to prevent PIL images from being garbage collected
         self.image_cache = {} 
         self.raw_var_map = {}
         self.variable_map = {} 
         
+        # Ensure the images directory exists
         if not os.path.exists("images"):
             os.makedirs("images")
 
+        # UI Styling
         style = ttk.Style()
         style.theme_use('default')
         style.configure("TNotebook", background=BG_MAIN, borderwidth=0)
         style.configure("TNotebook.Tab", background=BG_PANEL, foreground=TEXT_PRIMARY, padding=[15, 5], font=("Arial", 10, "bold"))
         style.map("TNotebook.Tab", background=[("selected", "#2980b9")])
 
+        # Main Navigation
         self.notebook = ttk.Notebook(self.root)
         self.notebook.pack(fill="both", expand=True)
 
@@ -48,6 +59,7 @@ class MagicGUI:
         self._build_editor_layout(on_compile_click)
         self._build_visualizer_layout(on_next_click, on_auto_click, on_pause_click, on_load_click)
 
+    # ── TAB 1: CODE EDITOR ────────────────────────────────────────
     def _build_editor_layout(self, on_compile):
         toolbar = tk.Frame(self.tab_editor, bg=BG_PANEL, pady=10, padx=20)
         toolbar.pack(fill="x")
@@ -88,7 +100,6 @@ class MagicGUI:
         self.notebook.select(self.tab_visualizer)
         
     def set_variable_map(self, var_map):
-        """Stores the variable mapping from the compiler to decode binary values."""
         self.raw_var_map = var_map
         self.variable_map = {}
         for var_name, cols in var_map.items():
@@ -98,6 +109,7 @@ class MagicGUI:
         if not var_map:
             self.lbl_variables.config(text="No variables mapped.\nCompile to inspect.")
 
+    # ── TAB 2: VISUALIZER ────────────────────────────────────────
     def _build_visualizer_layout(self, on_next, on_auto, on_pause, on_load):
         header = tk.Frame(self.tab_visualizer, bg=BG_PANEL, pady=10, padx=20)
         header.pack(fill="x")
@@ -121,11 +133,9 @@ class MagicGUI:
         self.lbl_step = tk.Label(header, text="Step 0 / -", bg=BG_PANEL, fg=TEXT_ACCENT, font=("Courier New", 12, "bold"))
         self.lbl_step.pack(side="right")
 
-        # Central container for Battlefield and Memory Inspector
         bf_container = tk.Frame(self.tab_visualizer, bg=BG_MAIN)
         bf_container.pack(fill="both", expand=True, pady=10)
 
-        # Left side: Battlefield Canvas
         bf_frame = tk.Frame(bf_container, bg=BG_MAIN)
         bf_frame.pack(side="left", fill="both", expand=True)
         tk.Label(bf_frame, text="THE BATTLEFIELD", bg=BG_MAIN, fg=TEXT_MUTED, font=("Arial", 10, "bold")).pack()
@@ -138,7 +148,6 @@ class MagicGUI:
         self.canvas_bf.pack(side="left", fill="both", expand=True, padx=20, pady=5)
         self.canvas_bf.bind("<Configure>", lambda e: self._on_canvas_resize())
 
-        # Right side: Memory Inspector Panel
         inspector_frame = tk.Frame(bf_container, bg=BG_PANEL, width=250)
         inspector_frame.pack(side="right", fill="y", padx=(0, 20), pady=5)
         tk.Label(inspector_frame, text="MEMORY INSPECTOR", bg=BG_PANEL, fg=TEXT_ACCENT, font=("Arial", 10, "bold")).pack(pady=10)
@@ -146,20 +155,22 @@ class MagicGUI:
         self.lbl_variables = tk.Label(inspector_frame, text="Compile code to\ninspect variables.", bg=BG_PANEL, fg=TEXT_PRIMARY, font=("Courier New", 14, "bold"), justify="left")
         self.lbl_variables.pack(padx=20, pady=10, anchor="nw")
 
-        # Bottom: Playmat
-        playmat = tk.Frame(self.tab_visualizer, bg="#000000", height=200)
+        # --- PLAYMAT (Stack, Log, Grave, Deck) ---
+        playmat = tk.Frame(self.tab_visualizer, bg="#000000", height=400)
         playmat.pack(fill="x", side="bottom")
         
-        stack_frame = tk.Frame(playmat, bg="#000000", width=200, pady=10)
+        # 1. The Stack (Enlarged)
+        stack_frame = tk.Frame(playmat, bg="#000000", width=280, pady=10)
         stack_frame.pack(side="left", padx=20)
         tk.Label(stack_frame, text="THE STACK", bg="#000000", fg=TEXT_ACCENT, font=("Arial", 10, "bold")).pack()
-        self.canvas_stack = tk.Canvas(stack_frame, width=120, height=168, bg="#111", highlightthickness=0)
+        self.canvas_stack = tk.Canvas(stack_frame, width=250, height=350, bg="#111", highlightthickness=0)
         self.canvas_stack.pack()
 
+        # 2. Battle Log
         log_frame = tk.Frame(playmat, bg="#000000", pady=10)
         log_frame.pack(side="left", fill="both", expand=True, padx=10)
         tk.Label(log_frame, text="BATTLE LOG", bg="#000000", fg=TEXT_MUTED, font=("Arial", 10, "bold")).pack()
-        self.log_text = tk.Text(log_frame, height=8, bg="#111", fg="#a9cce3", font=("Courier New", 10), state="disabled")
+        self.log_text = tk.Text(log_frame, height=15, bg="#111", fg="#a9cce3", font=("Courier New", 10), state="disabled")
         self.log_text.pack(fill="both", expand=True)
 
         gd_frame = tk.Frame(playmat, bg="#000000", pady=10)
@@ -202,8 +213,12 @@ class MagicGUI:
             self.btn_auto.config(state="normal")
             self.btn_pause.config(state="disabled")
 
-    def _get_card_image(self, card_name, width, height):
-        cache_key = f"{card_name}_{width}x{height}"
+    # ── DYNAMIC IMAGE RENDERING ──────────────────────────────────
+    def _get_card_image(self, card_name, width, height, card_obj=None):
+        """Loads card image and overlays dynamic rules text if available."""
+        rules_text = card_obj.get_rules() if card_obj else ""
+        cache_key = f"{card_name}_{width}x{height}_{rules_text}"
+        
         if cache_key in self.image_cache:
             return self.image_cache[cache_key]
 
@@ -214,13 +229,17 @@ class MagicGUI:
                 break
 
         if img_path:
-            img = Image.open(img_path).resize((width, height), Image.Resampling.LANCZOS)
+            img = Image.open(img_path).convert("RGBA").resize((width, height), Image.Resampling.LANCZOS)
         else:
-            colors = {"Ooze": "#27ae60", "Zombie": "#2c3e50", "Rotlung Reanimator": "#8e44ad"}
-            color = colors.get(card_name, "#34495e")
-            img = Image.new('RGB', (width, height), color=color)
+            color = "#8e44ad" if "Rotlung" in card_name else "#34495e"
+            img = Image.new('RGBA', (width, height), color=color)
+
+        if rules_text:
             draw = ImageDraw.Draw(img)
-            draw.rectangle([5, 5, width-5, height-5], outline="white", width=2)
+            text_box_y = int(height * 0.62)
+            # Semi-transparent background box for rules readability
+            draw.rectangle([int(width*0.1), text_box_y, int(width*0.9), int(height*0.9)], fill=(0,0,0,180))
+            draw.text((int(width*0.15), text_box_y + 5), rules_text, fill="white")
 
         photo = ImageTk.PhotoImage(img)
         self.image_cache[cache_key] = photo
@@ -240,12 +259,13 @@ class MagicGUI:
         self.btn_pause.config(state="disabled")
 
     def show_in_stack(self, card_name, annotation):
+        """Displays the played card centered and large in the stack area."""
         self.canvas_stack.delete("all")
-        img = self._get_card_image(card_name, 120, 168)
-        self.canvas_stack.create_image(60, 84, image=img)
-        self.canvas_stack.create_text(60, 150, text=card_name, fill="white", font=("Arial", 9, "bold"))
+        img = self._get_card_image(card_name, 250, 350) 
+        self.canvas_stack.create_image(125, 175, image=img)
+        self.canvas_stack.create_text(125, 330, text=card_name, fill="white", font=("Arial", 12, "bold"))
         if annotation:
-            self.canvas_stack.create_text(60, 15, text=annotation, fill="#f39c12", font=("Courier", 8, "bold"))
+            self.canvas_stack.create_text(125, 25, text=annotation, fill="#f39c12", font=("Courier", 10, "bold"))
 
     def move_stack_to_graveyard(self, card_name):
         self.canvas_stack.delete("all")
@@ -274,7 +294,6 @@ class MagicGUI:
 
         next_y = 20
         next_y = self._draw_row(row0_items, next_y, "ROW 0: MEMORY TAPE")
-        # Ensure there is a gap between the memory row and the processor row
         next_y += 30 
         self._draw_row(row1_items, next_y, "ROW 1: PROCESSOR")
 
@@ -282,7 +301,6 @@ class MagicGUI:
         self._update_inspector(grid_dict)
 
     def _update_inspector(self, grid_dict):
-        """Reads the Memory Tape to update the Memory Inspector with decimal values."""
         if not self.raw_var_map:
             return
             
@@ -313,7 +331,6 @@ class MagicGUI:
         if canvas_w < 100: canvas_w = 1000 
 
         current_x = 20
-        # Increased Y padding so variables text does not overlap with row titles
         current_y = start_y + 70
 
         for col, creature in row_items:
@@ -321,14 +338,14 @@ class MagicGUI:
             
             if current_x + self.cell_w + 10 > canvas_w:
                 current_x = 20
-                # Slightly larger wrap spacing to prevent overlaps on new lines
                 current_y += self.cell_h + 60 
 
             x_center = current_x + (self.cell_w // 2)
             y_center = current_y + (self.cell_h // 2)
 
             name = creature.name if hasattr(creature, 'name') else str(creature)
-            img = self._get_card_image(name, self.cell_w, self.cell_h)
+            # Pass the card object to allow dynamic text rendering
+            img = self._get_card_image(name, self.cell_w, self.cell_h, card_obj=creature)
             
             self.canvas_bf.create_image(x_center, y_center, image=img)
             
@@ -351,17 +368,14 @@ class MagicGUI:
                 self.canvas_bf.create_rectangle(box_x1, box_y1, box_x2, box_y2, fill=bg_color, outline="white")
                 self.canvas_bf.create_text((box_x1 + box_x2) / 2, (box_y1 + box_y2) / 2, text=stats, fill="white", font=("Arial", font_size, "bold"))
 
-            # Display Variable Name Above the card
             var_name = self.variable_map.get(col, "")
             label_text = f"[{col}]\n{var_name}" if var_name and "MEMORY" in row_name else f"[{col}]"
             label_color = TEXT_ACCENT if var_name else TEXT_MUTED
             
-            # Adjusted Y offset (-30) to create breathing room from the card's top edge
             self.canvas_bf.create_text(x_center, current_y - 30, text=label_text, fill=label_color, font=("Courier New", 9, "bold"), justify="center")
 
             current_x += self.cell_w + 15
 
-        # Return Y position offset for the next row
         return current_y + self.cell_h + 20
 
     def add_log(self, message):
@@ -376,7 +390,7 @@ class MagicGUI:
         self.canvas_deck.itemconfig(self.lbl_cards_left, text=f"{cards_left} left")
 
     def finish(self):
-        self.btn_next.config(state="disabled")
+        self.btn_next.config(state="disabled", text="Finished")
         self.btn_auto.config(state="disabled")
         self.btn_pause.config(state="disabled")
         self.add_log("=== PROGRAM TERMINATED ===")

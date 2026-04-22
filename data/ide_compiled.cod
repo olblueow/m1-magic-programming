@@ -5,45 +5,109 @@
         <card name="Rotlung Reanimator" annotation="1,0"/>
         <card name="Battlegrowth" annotation="1,0"/>
         <card name="Slime Molding" annotation="0,0"/>
-        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
-        <card name="Infest" annotation="Write '1' at [0]"/>
         <card name="Slime Molding" annotation="0,1"/>
         <card name="Battlegrowth" annotation="0,0"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
+        <card name="Infest" annotation="Write '1' at [1]"/>
         <card name="Slime Molding" annotation="0,2"/>
         <card name="Battlegrowth" annotation="0,1"/>
-        <card name="Infest" annotation="Write '1' at [2]"/>
         <card name="Slime Molding" annotation="0,3"/>
         <card name="Battlegrowth" annotation="0,2"/>
+        <card name="Infest" annotation="Write '1' at [3]"/>
         <card name="Slime Molding" annotation="0,4"/>
         <card name="Battlegrowth" annotation="0,3"/>
         <card name="Slime Molding" annotation="0,5"/>
         <card name="Battlegrowth" annotation="0,4"/>
-        <card name="Infest" annotation="Write '1' at [5]"/>
         <card name="Slime Molding" annotation="0,6"/>
         <card name="Battlegrowth" annotation="0,5"/>
+        <card name="Infest" annotation="Write '1' at [6]"/>
         <card name="Slime Molding" annotation="0,7"/>
         <card name="Battlegrowth" annotation="0,6"/>
-        <card name="Infest" annotation="Write '1' at [7]"/>
         <card name="Fate Transfer" annotation="0,6|0,7"/>
         <card name="Fate Transfer" annotation="0,5|0,6"/>
         <card name="Fate Transfer" annotation="0,4|0,5"/>
         <card name="Fate Transfer" annotation="0,3|0,4"/>
-        <card name="Infest" annotation="Write '1' at [3]"/>
-        <card name="Fate Transfer" annotation="0,2|0,3"/>
         <card name="Artificial Evolution" annotation="1,0|Zombie|Cleric"/>
         <card name="Artificial Evolution" annotation="1,0|Ooze|Zombie"/>
         <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
-        <card name="Infest" annotation="Write '0' at [2]"/>
+        <card name="Infest" annotation="Write '0' at [3]"/>
+        <card name="Fate Transfer" annotation="0,2|0,3"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Ooze"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Zombie"/>
+        <card name="Infest" annotation="Write '1' at [2]"/>
         <card name="Bioshift" annotation="0,3|0,2"/>
         <card name="Bioshift" annotation="0,4|0,3"/>
         <card name="Bioshift" annotation="0,5|0,4"/>
         <card name="Bioshift" annotation="0,6|0,5"/>
         <card name="Bioshift" annotation="0,7|0,6"/>
+        <card name="Infest" annotation="Write '1' at [7]"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Zombie"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
+        <card name="Infest" annotation="Write '0' at [7]"/>
+        <card name="Fate Transfer" annotation="0,6|0,7"/>
+        <card name="Infest" annotation="Write '0' at [6]"/>
+        <card name="Fate Transfer" annotation="0,5|0,6"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Ooze"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Zombie"/>
+        <card name="Infest" annotation="Write '1' at [5]"/>
+        <card name="Bioshift" annotation="0,6|0,5"/>
+        <card name="Bioshift" annotation="0,7|0,6"/>
+        <card name="Infest" annotation="Write '1' at [7]"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Zombie"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
         <card name="Infest" annotation="Write '0' at [7]"/>
         <card name="Fate Transfer" annotation="0,6|0,7"/>
         <card name="Artificial Evolution" annotation="1,0|Ooze|Cleric"/>
         <card name="Artificial Evolution" annotation="1,0|Zombie|Ooze"/>
         <card name="Artificial Evolution" annotation="1,0|Cleric|Zombie"/>
         <card name="Infest" annotation="Write '1' at [6]"/>
+        <card name="Bioshift" annotation="0,7|0,6"/>
+        <card name="Infest" annotation="Write '1' at [7]"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Zombie"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
+        <card name="Infest" annotation="Write '0' at [7]"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Ooze"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Zombie"/>
+        <card name="Infest" annotation="Write '1' at [7]"/>
+        <card name="Fate Transfer" annotation="0,6|0,7"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Zombie"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
+        <card name="Infest" annotation="Write '0' at [6]"/>
+        <card name="Fate Transfer" annotation="0,5|0,6"/>
+        <card name="Fate Transfer" annotation="0,4|0,5"/>
+        <card name="Fate Transfer" annotation="0,3|0,4"/>
+        <card name="Fate Transfer" annotation="0,2|0,3"/>
+        <card name="Fate Transfer" annotation="0,1|0,2"/>
+        <card name="Fate Transfer" annotation="0,0|0,1"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Ooze"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Zombie"/>
+        <card name="Infest" annotation="Write '1' at [0]"/>
+        <card name="Bioshift" annotation="0,1|0,0"/>
+        <card name="Bioshift" annotation="0,2|0,1"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Zombie"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Ooze"/>
+        <card name="Infest" annotation="Write '0' at [2]"/>
+        <card name="Bioshift" annotation="0,3|0,2"/>
+        <card name="Fate Transfer" annotation="0,2|0,3"/>
+        <card name="Fate Transfer" annotation="0,1|0,2"/>
+        <card name="Fate Transfer" annotation="0,0|0,1"/>
+        <card name="Infest" annotation="Write '0' at [0]"/>
+        <card name="Bioshift" annotation="0,1|0,0"/>
+        <card name="Infest" annotation="Write '0' at [1]"/>
+        <card name="Bioshift" annotation="0,2|0,1"/>
+        <card name="Artificial Evolution" annotation="1,0|Ooze|Cleric"/>
+        <card name="Artificial Evolution" annotation="1,0|Zombie|Ooze"/>
+        <card name="Artificial Evolution" annotation="1,0|Cleric|Zombie"/>
+        <card name="Infest" annotation="Write '1' at [2]"/>
+        <card name="Bioshift" annotation="0,3|0,2"/>
     </zone>
 </cockatrice_deck>
