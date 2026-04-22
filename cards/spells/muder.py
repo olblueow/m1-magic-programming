@@ -13,7 +13,7 @@ class Murder(Card):
         
         if target:
             # Set toughness to 0 so the Game Engine triggers its death
-            target.toughness = 0
+            target.base_toughness = 0
             return f"Murder: Target at [{row}, {col}] was assassinated."
             
         return f"Murder: No target found at [{row}, {col}]."

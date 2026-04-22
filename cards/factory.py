@@ -24,8 +24,8 @@ for card_class in get_all_subclasses(Card):
     try:
         temp_instance = card_class() # type: ignore
         REGISTRY[temp_instance.name] = card_class
-    except:
-        pass
+    except Exception as e:
+            print(f"Warning: Failed to load card class {card_class.__name__} - {e}")
 
 def create(name: str):
     """Create a new card instance by its name."""

@@ -12,8 +12,8 @@ class GiantGrowth(Card):
         
         if target:
             # Classic +3/+3 from Magic The Gathering
-            target.power += 3
-            target.toughness += 3
+            target.temp_power += 3
+            target.temp_toughness += 3
             return f"Giant Growth: +3/+3 granted to target at [{row}, {col}]"
             
         return "Giant Growth: Invalid target."

@@ -6,17 +6,21 @@ import copy
 
 
 class GameController:
-    def __init__(self, cod_path):
+    """
+    Main controller coordinating the execution of a compiled Magic deck.
+    Reads instructions, instantiates cards, and passes them to the Game Engine.
+    """
+    def __init__(self, cod_path: str):
         self.cod_path = cod_path
 
-        # Core
+        # Core components
         self.loader = None
         self.instructions = []
 
         self.board = None
         self.engine = None
 
-        # State
+        # State tracking
         self.current_step = 0
         self.history = []
         self.loaded = False
@@ -25,11 +29,12 @@ class GameController:
     # Load game
     # ----------
     def load(self):
+        """Loads the XML .cod file and initializes the battlefield and engine."""
         self.loader = DeckLoader(self.cod_path)
         self.instructions = self.loader.instructions
 
         if not self.instructions:
-            raise ValueError("No instructions found")
+            raise ValueError("No instructions found in the loaded file.")
 
         self.board = Battlefield()
         self.engine = GameEngine(self.board)
@@ -42,8 +47,11 @@ class GameController:
     # Next step
     # ----------
     def next_step(self):
-        if not self.loaded:
-            raise RuntimeError("Call load() first")
+        """Executes the next instruction in the program sequence."""
+        
+        # Pylance Fix: Ensure engine and board are properly initialized
+        if not self.loaded or self.engine is None or self.board is None:
+            raise RuntimeError("Engine not ready. Call load() first.")
 
         if self.current_step >= len(self.instructions):
             return {
@@ -54,19 +62,26 @@ class GameController:
 
         inst = self.instructions[self.current_step]
 
+        # Pylance Fix: Safely retrieve and validate the card name string
         card_name = inst.get("card")
-        annotation = inst.get("annotation", "")
+        if not isinstance(card_name, str):
+            return {"error": "Invalid or missing 'card' key in instructions."}
+            
+        # Pylance Fix: Ensure annotation is strictly a string
+        annotation = str(inst.get("annotation", ""))
 
         card = factory.create(card_name)
 
         if not card:
-            return {"error": f"Card not found: {card_name}"}
+            return {"error": f"Card not found in registry: {card_name}"}
 
+        # The engine exists (checked above), so we can safely resolve
         log = self.engine.resolve(card, annotation)
 
         result = {
             "step": self.current_step,
             "card": card_name,
+            "type": card.type,
             "annotation": annotation,
             "log": log,
             "board": self._snapshot(),
@@ -82,8 +97,9 @@ class GameController:
     # Auto play
     # ----------
     def auto_play(self):
+        """Executes all remaining instructions sequentially."""
         if not self.loaded:
-            raise RuntimeError("Call load() first")
+            raise RuntimeError("Engine not ready. Call load() first.")
 
         results = []
 
@@ -96,15 +112,24 @@ class GameController:
     # Helpers
     # ----------
     def is_done(self):
+        """Checks if the end of the instruction sequence is reached."""
         return self.current_step >= len(self.instructions)
 
     def reset(self):
+        """Reloads the simulation from the beginning."""
         self.load()
 
     def get_total_steps(self):
+        """Returns the total number of instructions to execute."""
         return len(self.instructions)
 
     def _snapshot(self):
+        """Creates a snapshot of the current board state for the GUI."""
+        
+        # Pylance Fix: Guard against uninitialized board
+        if self.board is None:
+            return [[], []]
+            
         grid = self.board.grid
 
         if not grid:
@@ -113,7 +138,7 @@ class GameController:
         result = [[], []]
 
         for row in [0, 1]:
-            # to find all columns in the row
+            # Find all existing columns for the current row
             cols = sorted([col for (r, col) in grid.keys() if r == row])
 
             if not cols:
@@ -123,6 +148,7 @@ class GameController:
             min_col = min(cols)
             max_col = max(cols)
 
+            # Build a linear representation spanning from the lowest to the highest index
             for col in range(min_col, max_col + 1):
                 result[row].append(self.board.get_card_at(row, col))
 
@@ -130,20 +156,20 @@ class GameController:
 
 
 # ----------
-# Test
+# Command Line Test Execution
 # ----------
 if __name__ == "__main__":
     game = GameController("data/test.cod")
     game.load()
 
     while True:
-        result = game.next_step()
+        res = game.next_step()
 
-        if result.get("done"):
+        if res.get("done"):
             print("\n=== END ===")
             break
 
-        print(f"\nSTEP {result['step']}")
-        print(f"Card: {result['card']}")
-        print(f"Effect: {result['log']}")
-        print(f"Board: {result['board']}")
+        print(f"\nSTEP {res['step']}")
+        print(f"Card: {res['card']}")
+        print(f"Effect: {res.get('log', '')}")
+        print(f"Board: {res['board']}")
